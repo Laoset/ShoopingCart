@@ -1,4 +1,3 @@
-import React from "react";
 import { useState, useEffect } from "react";
 import { ProductsList } from "../components/productslist";
 import Axios from "axios";
@@ -8,7 +7,7 @@ export const TrueHome = () => {
 
   //Agregar algo, hacer algo cuando se cargue
   useEffect(() => {
-    Axios.get("https://api-to-vercel-olive.vercel.app/api/productos").then(
+    Axios.get("https://shooping-cart-9je7.vercel.app/api/productos").then(
       (response) => {
         setProducts(response.data);
       }

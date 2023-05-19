@@ -1,4 +1,3 @@
-import React from "react";
 import { useState, useEffect } from "react";
 import Axios from "axios";
 import {
@@ -28,7 +27,7 @@ const DeporteCategory = () => {
 
   useEffect(() => {
     Axios.get(
-      "https://api-to-vercel-olive.vercel.app/api/productos/category/Deporte"
+      "https://shooping-cart-9je7.vercel.app/api/productos/category/Deporte"
     ).then((response) => {
       setProducts(response.data);
     });

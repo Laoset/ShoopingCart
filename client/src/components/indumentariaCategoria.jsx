@@ -1,4 +1,3 @@
-import React from "react";
 import { useState, useEffect } from "react";
 import Axios from "axios";
 import {
@@ -28,12 +27,11 @@ const IndumentariaCategoria = () => {
 
   useEffect(() => {
     Axios.get(
-      "https://api-to-vercel-olive.vercel.app/api/productos/category/Indumentaria"
+      "https://shooping-cart-9je7.vercel.app/api/productos/category/Indumentaria"
     ).then((response) => {
       setProducts(response.data);
     });
   }, []);
-
   return (
     <section className="w-full h-full px-6 flex flex-col justify-center">
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 lg:gap-6 h-full my-2">
