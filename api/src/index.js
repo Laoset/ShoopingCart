@@ -1,4 +1,4 @@
-import data from "../data/data";
+const data = require("../data/data");
 const express = require("express");
 const app = express();
 var cors = require("cors");
