@@ -1,35 +1,64 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { FormularioLogin } from "./sections/loginForm";
+import { NavBar } from "./sections/navBar";
+import { Cart } from "./sections/cart";
+
+//Componetes de Router
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import TrueHome from "./sections/displayProducts";
+import { useEffect, useState } from "react";
+import RegisterForm from "./sections/registerForm";
+import ElectroCategory from "./components/electroCategory";
+import IndumentariaCategoria from "./components/indumentariaCategoria";
+import HogarCategoria from "./components/hogarCategoria";
+import DeporteCategory from "./components/deporteCategory";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [currentForm, setCurrentForm] = useState("login");
+  const toggleForm = (formName) => {
+    setCurrentForm(formName);
+  };
+  useEffect(() => {
+    let id = localStorage.getItem("sesion");
+    if (id) {
+      navigate("/home");
+    }
+    console.log("good");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="w-full h-full flex flex-col">
+      {location.pathname === "/" ? null : (
+        <header className=" md:h-[90px] xs:h-[110px] w-full  bg-[#232f3e]">
+          <NavBar />
+        </header>
+      )}
+      <main className="w-full h-full bg-[#ebebeb] ">
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={
+              currentForm === "login" ? (
+                <FormularioLogin onFormSwitch={toggleForm} />
+              ) : (
+                <RegisterForm onFormSwitch={toggleForm} />
+              )
+            }
+          />
+          <Route path="/home" element={<TrueHome />} />
+          <Route path="/catElectro" element={<ElectroCategory />} />
+          <Route path="/catIndumen" element={<IndumentariaCategoria />} />
+          <Route path="/catHogar" element={<HogarCategoria />} />
+          <Route path="/catDeporte" element={<DeporteCategory />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/*" element={<h1>NO EXISTE TAL RUTA</h1>} />
+        </Routes>
+      </main>
+    </div>
+  );
 }
 
-export default App
+export default App;
