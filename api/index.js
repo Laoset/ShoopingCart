@@ -1,4 +1,4 @@
-const data = require("../data/data");
+const data = require("./data/data");
 const express = require("express");
 const app = express();
 var cors = require("cors");
@@ -56,9 +56,9 @@ app.post("/api/usuarios", (req, res) => {
   res.json(newUsuario);
 });
 
-// const PORT = 8080;
-// app.listen(PORT, () =>
-//   console.log(`Servidor en funcionamiento en el puerto ${PORT}`)
-// );
+const PORT = 8080;
+app.listen(PORT, () =>
+  console.log(`Servidor en funcionamiento en el puerto ${PORT}`)
+);
 
 module.exports = app;
